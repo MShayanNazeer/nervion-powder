@@ -26,7 +26,10 @@ echo "export KUBECONFIG=${KUBECONFIG}" > $HOME/.profile
 
 # add repositories
 # Kubernetes
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
+# curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
+curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+chmod +x ./kubectl
+sudo mv ./kubectl /usr/local/bin/kubectl
 sudo add-apt-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
 # Docker
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
