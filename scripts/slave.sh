@@ -21,8 +21,11 @@ export KUBECONFIG=$KUBEHOME/admin.conf
 sudo chsh -s /bin/bash $username
 echo "export KUBECONFIG=${KUBECONFIG}" > $HOME/.profile
 
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
+# curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
+curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
 sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+chmod +x ./kubectl
+sudo mv ./kubectl /usr/local/bin/kubectl
 echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
 
 cd $WORKINGDIR
